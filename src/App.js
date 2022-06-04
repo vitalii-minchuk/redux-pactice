@@ -1,23 +1,26 @@
-import logo from './logo.svg';
+import { useDispatch, useSelector } from 'react-redux';
 import './App.css';
 
 function App() {
+  const dispatch = useDispatch()
+  const cash = useSelector(state => state.cash)
+
+  const addCash = (cash) => {
+    dispatch({type: "ADD_CASH", payload: cash})
+  }
+  const getCash = (cash) => {
+    dispatch({type: "GET_CASH", payload: cash})
+  }
+  
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div style={{display: "flex", gap: "20px"}}>
+        <button onClick={() => addCash(Number(prompt()))}>add money</button>
+        <button onClick={() => getCash(Number(prompt()))}>get money</button>
+      </div>
+      <div>
+        {cash}
+      </div>
     </div>
   );
 }
