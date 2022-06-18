@@ -9,17 +9,9 @@ import Paper from '@mui/material/Paper';
 import { data } from '../data';
 import Popup from './Popup';
 
-const MainTable = () => {
+const MainTable = ({regions, handleMiniTableOpen}) => {
   
-  const [open, setOpen] = React.useState(false)
-  
-  const handlePopupOpen = () => {
-    setOpen(true)
-  }
-
-  const handlePopupClose = () => {
-    setOpen(false)
-  }
+ 
 
   return (
     <React.Fragment>
@@ -52,16 +44,16 @@ const MainTable = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {data.map((el) => (
+            {regions.map((el) => (
               <TableRow
                 key={el.region}
                 sx={{ "&:last-child td, &:last-child th": { border: 0 }}}
-                
               >
                 <TableCell component="th" scope="row">
+                  
                   {el.region}
                 </TableCell>
-                <TableCell onClick={() => handlePopupOpen()} align="center">{el.year2017XX?.value || "---"}</TableCell>
+                <TableCell onClick={() => handleMiniTableOpen(el.year2017XX)} align="center">{el.year2017XX[0]?.value || "---"}</TableCell>
                 <TableCell align="center">{el.year2017YY?.value || "---"}</TableCell>
                 <TableCell align="center">{el.year2017ZZ?.value || "---"}</TableCell>
                 <TableCell align="center">{el.year2018XX?.value || "---"}</TableCell>
@@ -75,7 +67,6 @@ const MainTable = () => {
           </TableBody>
         </Table>
       </TableContainer>
-      <Popup handlePopupClose={handlePopupClose} open={open} />
     </React.Fragment>
   )
 }

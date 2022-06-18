@@ -2,7 +2,7 @@ import {  Modal, Paper } from "@mui/material"
 import React from "react"
 import MiniTable from "./MiniTable";
 
-const Popup = ({handlePopupClose, open}) => {
+const Popup = ({handlePopupClose, open, cellData}) => {
   
   return (
     <React.Fragment>
@@ -13,7 +13,7 @@ const Popup = ({handlePopupClose, open}) => {
   aria-describedby="parent-modal-description"
 >
   <Paper>
-    <MiniTable />
+    <MiniTable cellData={cellData} />
   </Paper>
 </Modal>
 </React.Fragment>

@@ -1,33 +1,52 @@
 import { Button } from "@mui/material"
 import Container from "@mui/material/Container"
-import { addDoc, collection, doc, onSnapshot } from "firebase/firestore"
 import React from "react"
 import MainTable from "./components/MainTable"
-import { db } from "./farebase-config"
+import Popup from "./components/Popup"
+import {  addNewRegion, deleteRegion, getData } from "./firebase"
 
 const App = () => {
   const [regions, setRegions] = React.useState([])
+  const [cellData, setCellData] = React.useState([])
+  const [open, setOpen] = React.useState(false)
 
-  console.log(regions);
   React.useEffect(() => {
-    onSnapshot(collection(db, "regions"), (snapshot) => {
-      console.log(snapshot.docs)
-      setRegions(snapshot.docs.map(doc => ({...doc.data(), id: doc.id})))
+    getData().then((res) =>{
+      setRegions(res)
     })
-  }, [])
+    
+  }, [open])
 
-  const handelClick = async () => {
-    const name = prompt("Hello add region")
-    const collectionRef = collection(db, "regions")
-    const payload = { name }
 
-    await addDoc(collectionRef, payload)
+
+  const handleMiniTableOpen = (data) => {
+    setCellData(data)
+    setOpen(true)
   }
 
+  const handlePopupClose = () => {
+    setOpen(false)
+  }
+
+  const handelNewRegionClick = () => {
+    addNewRegion()
+  }
+
+  const handelDeleteRegionClick = () => {
+    deleteRegion()
+  } 
+  console.log(regions);
+  
+  
   return (
-    <Container maxWidth="xl">
-      <MainTable />
-      <Button onClick={() => handelClick()}>hello</Button>
+    <Container maxWidth="xl" height="60vh">
+      <MainTable regions={regions} handleMiniTableOpen={handleMiniTableOpen} />
+      {regions.length < 4 &&
+        <Button sx={{color: "#333"}} onClick={() => handelNewRegionClick()}>Add new region +</Button>
+      }
+      <Button sx={{color: "brown"}} onClick={() => {handelDeleteRegionClick()}}>Delete region -</Button>
+      
+      <Popup handlePopupClose={handlePopupClose} open={open} cellData={cellData} />
     </Container>
   )
 }
