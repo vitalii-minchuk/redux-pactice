@@ -44,24 +44,23 @@ const MainTable = ({regions, handleMiniTableOpen}) => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {regions.map((el) => (
+            {regions?.map((el) => (
               <TableRow
                 key={el.region}
                 sx={{ "&:last-child td, &:last-child th": { border: 0 }}}
               >
                 <TableCell component="th" scope="row">
-                  
                   {el.region}
                 </TableCell>
-                <TableCell onClick={() => handleMiniTableOpen(el.year2017XX)} align="center">{el.year2017XX[0]?.value || "---"}</TableCell>
-                <TableCell align="center">{el.year2017YY?.value || "---"}</TableCell>
-                <TableCell align="center">{el.year2017ZZ?.value || "---"}</TableCell>
-                <TableCell align="center">{el.year2018XX?.value || "---"}</TableCell>
-                <TableCell align="center">{el.year2018YY?.value || "---"}</TableCell>
-                <TableCell align="center">{el.year2018ZZ?.value || "---"}</TableCell>
-                <TableCell align="center">{el.year2019XX?.value || "---"}</TableCell>
-                <TableCell align="center">{el.year2019YY?.value || "---"}</TableCell>
-                <TableCell align="center">{el.year2019ZZ?.value || "---"}</TableCell>
+                <TableCell onClick={() => handleMiniTableOpen(el?.year2017XX, "year2017XX", el?.id)} align="center">{el?.year2017XX?.value || "---"}</TableCell>
+                <TableCell onClick={() => handleMiniTableOpen(el?.year2017YY, "year2017YY", el?.id)} align="center">{el?.year2017YY?.value || "---"}</TableCell>
+                <TableCell onClick={() => handleMiniTableOpen(el?.year2017ZZ, "year2017ZZ", el?.id)} align="center">{el?.year2017ZZ?.value || "---"}</TableCell>
+                <TableCell onClick={() => handleMiniTableOpen(el?.year2018XX, "year2018XX", el?.id)} align="center">{el?.year2018XX?.value || "---"}</TableCell>
+                <TableCell onClick={() => handleMiniTableOpen(el?.year2018YY, "year2018YY", el?.id)} align="center">{el?.year2018YY?.value || "---"}</TableCell>
+                <TableCell onClick={() => handleMiniTableOpen(el?.year2018ZZ, "year2018ZZ", el?.id)} align="center">{el?.year2018ZZ?.value || "---"}</TableCell>
+                <TableCell onClick={() => handleMiniTableOpen(el?.year2019XX, "year2019XX", el?.id)} align="center">{el?.year2019XX?.value || "---"}</TableCell>
+                <TableCell onClick={() => handleMiniTableOpen(el?.year2019YY, "year2019YY", el?.id)} align="center">{el?.year2019YY?.value || "---"}</TableCell>
+                <TableCell onClick={() => handleMiniTableOpen(el?.year2019ZZ, "year2019ZZ", el?.id)} align="center">{el?.year2019ZZ?.value || "---"}</TableCell>
               </TableRow>
             ))}
           </TableBody>

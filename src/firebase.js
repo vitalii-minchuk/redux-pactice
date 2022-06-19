@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app"
-import { addDoc, collection, deleteDoc, doc, getDocs, getFirestore, query } from "firebase/firestore"
+import { addDoc, collection, deleteDoc, doc, getDocs, getFirestore, query, updateDoc } from "firebase/firestore"
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_API_KEY,
@@ -20,15 +20,15 @@ export const getData = async () => {
   const q = query(collection(db, "regions"))
   const snapshot = await getDocs(q)
   const data = snapshot.docs.map(doc => ({...doc.data(), id: doc.id}))
-      console.log(data);
-  data.map((elem) => {
-    years.forEach(async (year) => {
-      const yearQ = query(collection(db, `regions/${elem.id}/${year}`))
-      const yearDetails = await getDocs(yearQ)
-      const yearInfo = yearDetails.docs.map(doc => ({...doc.data(), id: doc.id}))
-      elem[year] = yearInfo
-    })
-  })
+   
+  // data.map((elem) => {
+  //   years.forEach(async (year) => {
+  //     const yearQ = query(collection(db, `regions/${elem.id}/${year}`))
+  //     const yearDetails = await getDocs(yearQ)
+  //     const yearInfo = yearDetails.docs.map(doc => ({...doc.data(), id: doc.id}))
+  //     elem[year] = yearInfo
+  //   })
+  // })
   
   return data
 }
@@ -53,6 +53,11 @@ export const deleteRegion = async () => {
   await deleteDoc(docRef)
 }
 
-
+export const updateUsersData = async (id, value, newData) => {
+  const docRef = doc(db, "regions", id)
+console.log(value, id)
+console.log({[value]: newData})
+  await updateDoc(docRef, {[value]: newData})
+}
 
 
