@@ -6,3 +6,5 @@ export const dateTransform =(date) => {
 }
 
 export const myTimestamp = () => Timestamp.fromDate(new Date())
+
+export const messageAddSuccess = "Item has been added successfully"

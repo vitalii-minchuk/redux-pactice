@@ -2,7 +2,7 @@ import {  Modal, Paper } from "@mui/material"
 import React from "react"
 import MiniTable from "./MiniTable";
 
-const Popup = ({handlePopupClose, open, cellData, handelUpdateCellsData}) => {
+const MiniTablePopup = ({handlePopupClose, open, cellData, handelUpdateCellsData}) => {
   
   return (
     <React.Fragment>
@@ -12,7 +12,7 @@ const Popup = ({handlePopupClose, open, cellData, handelUpdateCellsData}) => {
   aria-labelledby="parent-modal-title"
   aria-describedby="parent-modal-description"
 >
-  <Paper>
+  <Paper elevation={12}>
     <MiniTable handlePopupClose={handlePopupClose} cellData={cellData} handelUpdateCellsData={handelUpdateCellsData} />
   </Paper>
 </Modal>
@@ -20,4 +20,4 @@ const Popup = ({handlePopupClose, open, cellData, handelUpdateCellsData}) => {
   )
 }
 
-export default Popup
+export default MiniTablePopup

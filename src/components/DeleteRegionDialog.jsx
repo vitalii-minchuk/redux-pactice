@@ -41,7 +41,7 @@ function SimpleDialog(props) {
   );
 }
 
-export const DeleteDialog = ({ regions, handelDeleteRegion }) => {
+export const DeleteRegionDialog = ({ regions, handelDeleteRegion }) => {
   const [open, setOpen] = React.useState(false)
 
   const handleClickOpen = () => {

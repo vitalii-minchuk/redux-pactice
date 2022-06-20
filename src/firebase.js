@@ -16,10 +16,10 @@ export const db = getFirestore()
 
 const years = ["year2017XX", "year2017YY", "year2017ZZ", "year2018XX", "year2018YY", "year2018ZZ", "year2019XX", "year2019YY", "year2019ZZ"]
 
-export const getData = async () => {
-  const q = query(collection(db, "regions"))
-  const snapshot = await getDocs(q)
-  const data = snapshot.docs.map(doc => ({...doc.data(), id: doc.id}))
+// export const getData = async () => {
+//   const q = query(collection(db, "regions"))
+//   const snapshot = await getDocs(q)
+//   const data = snapshot.docs.map(doc => ({...doc.data(), id: doc.id}))
 
   // const colRef = collection(db, "regions")
   // onSnapshot(colRef, (snapshot) => {
@@ -39,8 +39,8 @@ export const getData = async () => {
   //   })
   // })
   
-  return data
-}
+//   return data
+// }
 
 
 const defaultRegionData = (name, arr) => {
@@ -52,9 +52,11 @@ const defaultRegionData = (name, arr) => {
 }
 
 
-export const addNewRegion = async () => {
+export const addNewRegion = async (name) => {
+  if(name.trim()) { 
   const docRef = collection(db, "regions")
-  await addDoc(docRef, defaultRegionData(prompt("Enter regions name"), years))
+  await addDoc(docRef, defaultRegionData(name, years))
+  }
 }
 
 export const deleteRegion = async (regionID) => {
