@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app"
-import { addDoc, collection, deleteDoc, doc, getDocs, getFirestore, query, updateDoc } from "firebase/firestore"
+import { addDoc, collection, deleteDoc, doc, getDocs, getFirestore, onSnapshot, query, updateDoc } from "firebase/firestore"
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_API_KEY,
@@ -12,7 +12,7 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig)
 
-const db = getFirestore()
+export const db = getFirestore()
 
 const years = ["year2017XX", "year2017YY", "year2017ZZ", "year2018XX", "year2018YY", "year2018ZZ", "year2019XX", "year2019YY", "year2019ZZ"]
 
@@ -20,7 +20,16 @@ export const getData = async () => {
   const q = query(collection(db, "regions"))
   const snapshot = await getDocs(q)
   const data = snapshot.docs.map(doc => ({...doc.data(), id: doc.id}))
-   
+
+  // const colRef = collection(db, "regions")
+  // onSnapshot(colRef, (snapshot) => {
+  //   let res =[]
+  //   snapshot.docs.forEach((doc) => {
+  //     res.push({...doc.data(), id: doc.id})
+  //   })
+  //   return res
+  // })
+  
   // data.map((elem) => {
   //   years.forEach(async (year) => {
   //     const yearQ = query(collection(db, `regions/${elem.id}/${year}`))
@@ -48,15 +57,13 @@ export const addNewRegion = async () => {
   await addDoc(docRef, defaultRegionData(prompt("Enter regions name"), years))
 }
 
-export const deleteRegion = async () => {
-  const docRef = doc(db, "regions", "DIoDbqFb4gnNTH0LvKam")
+export const deleteRegion = async (regionID) => {
+  const docRef = doc(db, "regions", regionID)
   await deleteDoc(docRef)
 }
 
 export const updateUsersData = async (id, value, newData) => {
   const docRef = doc(db, "regions", id)
-console.log(value, id)
-console.log({[value]: newData})
   await updateDoc(docRef, {[value]: newData})
 }
 

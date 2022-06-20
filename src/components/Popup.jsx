@@ -13,7 +13,7 @@ const Popup = ({handlePopupClose, open, cellData, handelUpdateCellsData}) => {
   aria-describedby="parent-modal-description"
 >
   <Paper>
-    <MiniTable cellData={cellData} handelUpdateCellsData={handelUpdateCellsData} />
+    <MiniTable handlePopupClose={handlePopupClose} cellData={cellData} handelUpdateCellsData={handelUpdateCellsData} />
   </Paper>
 </Modal>
 </React.Fragment>

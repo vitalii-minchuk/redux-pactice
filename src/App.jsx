@@ -1,24 +1,32 @@
 import { Button } from "@mui/material"
 import Container from "@mui/material/Container"
+import { collection, onSnapshot } from "firebase/firestore"
 import React from "react"
+import { DeleteDialog } from "./components/DeleteDialog"
 import MainTable from "./components/MainTable"
 import Popup from "./components/Popup"
-import {  addNewRegion, deleteRegion, getData, updateUsersData } from "./firebase"
+import {  addNewRegion, db, deleteRegion, getData, updateUsersData } from "./firebase"
 
 const App = () => {
   const [regions, setRegions] = React.useState([])
   const [open, setOpen] = React.useState(false)
   const [chosenCell, setChosenCell] = React.useState({data: [], value: "", id: null})
   
-  React.useEffect(() => {
-    getData().then((res) =>{
-      setRegions(res)
-    })
-  }, [open])
+  // React.useLayoutEffect(() => {
+  //   getData().then((res) =>{
+  //     console.log(res);
+  //     setRegions(res)
+  //   })
+  // }, [])
 
-  React.useEffect(() => {
-    
-  }, [])
+  const colRef = collection(db, "regions")
+  onSnapshot(colRef, (snapshot) => {
+    let res =[]
+    snapshot.docs.forEach((doc) => {
+      res.push({...doc.data(), id: doc.id})
+    })
+    setRegions(res)
+  })
 
   const handleMiniTableOpen = (data, el, id) => {
     setChosenCell({data: data, value: el, id:id})
@@ -33,8 +41,8 @@ const App = () => {
     addNewRegion()
   }
 
-  const handelDeleteRegionClick = () => {
-    deleteRegion()
+  const handelDeleteRegion = (id) => {
+    deleteRegion(id)
   }
 
   const handelUpdateCellsData = (newUsersData) => {
@@ -47,8 +55,9 @@ const App = () => {
       {regions.length < 4 &&
         <Button sx={{color: "#333"}} onClick={() => handelNewRegionClick()}>Add new region +</Button>
       }
-      <Button sx={{color: "brown"}} onClick={() => {handelDeleteRegionClick()}}>Delete region -</Button>
-      
+      {regions.length > 0 &&
+        <DeleteDialog handelDeleteRegion={handelDeleteRegion} regions={regions} />
+      }
       <Popup handlePopupClose={handlePopupClose} open={open} cellData={chosenCell.data} handelUpdateCellsData={handelUpdateCellsData} />
     </Container>
   )
