@@ -24,11 +24,11 @@ const MiniTable = ({cellData, handelUpdateCellsData, handlePopupClose}) => {
 
   const rowsData = users?.map((el) => {
     return ({
-      id: el.id || "---",
-      value: el.value || "---",
+      id: el.id,
+      value: el.value,
       date: el.date,
-      name: el.name || "---",
-      text: el.text || "---"
+      name: el.name,
+      text: el.text
     })
   })
   
@@ -37,7 +37,7 @@ const MiniTable = ({cellData, handelUpdateCellsData, handlePopupClose}) => {
     setTimeout(() => {
       setDisabledBtn(false)
     }, 1000)
-    const defaultUserData = {
+     const defaultUserData = {
       id: myTimestamp().seconds,
       value: 0,
       name: "",

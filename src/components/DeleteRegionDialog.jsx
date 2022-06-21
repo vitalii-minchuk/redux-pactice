@@ -12,6 +12,8 @@ import PersonIcon from '@mui/icons-material/Person';
 import AddIcon from '@mui/icons-material/Add';
 import Typography from '@mui/material/Typography';
 import { blue } from '@mui/material/colors';
+import { Snackbar } from '@mui/material';
+import { messageDeleteSuccess, SnackbarAlert } from '../utils';
 
 const emails = ['username@gmail.com', 'user02@gmail.com'];
 
@@ -42,27 +44,40 @@ function SimpleDialog(props) {
 }
 
 export const DeleteRegionDialog = ({ regions, handelDeleteRegion }) => {
-  const [open, setOpen] = React.useState(false)
+  const [openAlert, setOpenAlert] = React.useState(false)
+  const [openDialog, setOpenDialog] = React.useState(false)
 
-  const handleClickOpen = () => {
-    setOpen(true);
+  const handleDialogOpen = () => {
+    setOpenDialog(true);
   };
 
-  const handleClose = () => {
-    setOpen(false);
+  const handleDialogClose = () => {
+    setOpenDialog(false);
+    setOpenAlert(true)
   };
 
+  const handleAlertClose = (event, reason) => {
+    if(reason === "clickaway") {
+      return
+    }
+    setOpenAlert(false) 
+  }
   return (
     <React.Fragment>
-      <Button sx={{color: "brown"}} onClick={handleClickOpen}>
+      <Button sx={{color: "brown"}} onClick={handleDialogOpen}>
         Delete region -
       </Button>
       <SimpleDialog
-        open={open}
-        onClose={handleClose}
+        open={openDialog}
+        onClose={handleDialogClose}
         regions={regions}
         handelDeleteRegion={handelDeleteRegion}
       />
+      <Snackbar open={openAlert} autoHideDuration={2000} onClose={handleAlertClose}>
+        <SnackbarAlert onClose={handleAlertClose} severity="error">
+          {messageDeleteSuccess}
+        </SnackbarAlert>
+      </Snackbar>
     </React.Fragment>
   );
 }
