@@ -1,38 +1,34 @@
-import * as React from 'react';
-import Button from '@mui/material/Button';
-import TextField from '@mui/material/TextField';
-import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
-import DialogTitle from '@mui/material/DialogTitle';
-import { addNewRegion } from '../firebase';
-import { messageAddSuccess, SnackbarAlert, useSetTimeout } from '../utils';
-import { InfoSnackbar } from "./InfoSnackbar"
-import { Alert, Snackbar } from '@mui/material';
+import * as React from "react"
+import Button from "@mui/material/Button"
+import TextField from "@mui/material/TextField"
+import Dialog from "@mui/material/Dialog"
+import DialogActions from "@mui/material/DialogActions"
+import DialogContent from "@mui/material/DialogContent"
+import DialogContentText from "@mui/material/DialogContentText"
+import DialogTitle from "@mui/material/DialogTitle"
+import { addNewRegion } from "../firebase"
+import { messageAddSuccess, SnackbarAlert } from "../utils"
+import { Snackbar } from "@mui/material"
 
 
 
-export const AddRegionDialog = ({deleteUser}) => {
+export const AddRegionDialog = () => {
   const [openAlert, setOpenAlert] = React.useState(false)
-  const [openDialog, setOpenDialog] = React.useState(false);
-  const [inputValue, setInputValue] = React.useState("");
+  const [openDialog, setOpenDialog] = React.useState(false)
+  const [inputValue, setInputValue] = React.useState("")
 
-  const handleClickOpen = () => {
-    setOpenDialog(true);
-    
-  };
+  const handleClickOpen = () => setOpenDialog(true)
 
   const handleCloseDialog = () => {
-    
-    setOpenDialog(false);
+
+    setOpenDialog(false)
+
     if(inputValue) {
-      
       addNewRegion(inputValue)
       setOpenAlert(true)
     }
     setInputValue("")
-  };
+  }
 
   const handleClose = (event, reason) => {
     if(reason === "clickaway") {
@@ -42,7 +38,7 @@ export const AddRegionDialog = ({deleteUser}) => {
   }
 
   return (
-    <div>
+    <React.Fragment>
       <Button sx={{color: "#333"}} onClick={handleClickOpen}>
         Add new region +
       </Button>
@@ -74,8 +70,7 @@ export const AddRegionDialog = ({deleteUser}) => {
           {messageAddSuccess}
         </SnackbarAlert>
       </Snackbar>
-      {/* <InfoSnackbar isAlertOpen={alertSnackbar} message={messageAddSuccess} /> */}
-    </div>
+    </React.Fragment>
   )
 }
 

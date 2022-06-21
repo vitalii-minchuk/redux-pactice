@@ -1,26 +1,22 @@
-import * as React from 'react';
-import Button from '@mui/material/Button';
-import TextField from '@mui/material/TextField';
-import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
-import DialogTitle from '@mui/material/DialogTitle';
+import * as React from "react"
+import Button from "@mui/material/Button"
+import TextField from "@mui/material/TextField"
+import Dialog from "@mui/material/Dialog"
+import DialogActions from "@mui/material/DialogActions"
+import DialogContent from "@mui/material/DialogContent"
+import DialogContentText from "@mui/material/DialogContentText"
+import DialogTitle from "@mui/material/DialogTitle"
 
 export const DeleteUserDialog = ({deleteUser}) => {
   const [open, setOpen] = React.useState(false);
-  const [inputValue, setInputValue] = React.useState("");
+  const [inputValue, setInputValue] = React.useState("")
 
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
+  const handleClickOpen = () => setOpen(true)
 
   const handleClose = () => {
-    setOpen(false);
-
-    console.log(inputValue)
+    setOpen(false)
     deleteUser(+inputValue)
-  };
+  }
 
   return (
     <React.Fragment>
@@ -38,7 +34,7 @@ export const DeleteUserDialog = ({deleteUser}) => {
             autoFocus
             margin="dense"
             id="name"
-            label="Email Address"
+            label="User ID"
             type="number"
             fullWidth
             variant="standard"

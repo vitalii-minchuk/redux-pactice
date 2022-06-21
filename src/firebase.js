@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app"
-import { addDoc, collection, deleteDoc, doc, getDocs, getFirestore, onSnapshot, query, updateDoc } from "firebase/firestore"
+import { addDoc, collection, deleteDoc, doc, getFirestore, updateDoc } from "firebase/firestore"
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_API_KEY,
@@ -16,33 +16,6 @@ export const db = getFirestore()
 
 const years = ["year2017XX", "year2017YY", "year2017ZZ", "year2018XX", "year2018YY", "year2018ZZ", "year2019XX", "year2019YY", "year2019ZZ"]
 
-// export const getData = async () => {
-//   const q = query(collection(db, "regions"))
-//   const snapshot = await getDocs(q)
-//   const data = snapshot.docs.map(doc => ({...doc.data(), id: doc.id}))
-
-  // const colRef = collection(db, "regions")
-  // onSnapshot(colRef, (snapshot) => {
-  //   let res =[]
-  //   snapshot.docs.forEach((doc) => {
-  //     res.push({...doc.data(), id: doc.id})
-  //   })
-  //   return res
-  // })
-  
-  // data.map((elem) => {
-  //   years.forEach(async (year) => {
-  //     const yearQ = query(collection(db, `regions/${elem.id}/${year}`))
-  //     const yearDetails = await getDocs(yearQ)
-  //     const yearInfo = yearDetails.docs.map(doc => ({...doc.data(), id: doc.id}))
-  //     elem[year] = yearInfo
-  //   })
-  // })
-  
-//   return data
-// }
-
-
 const defaultRegionData = (name, arr) => {
   let obj = {region: name}
   arr.map((el) => {
@@ -53,6 +26,7 @@ const defaultRegionData = (name, arr) => {
 
 
 export const addNewRegion = async (name) => {
+  
   if(name.trim()) { 
   const docRef = collection(db, "regions")
   await addDoc(docRef, defaultRegionData(name, years))

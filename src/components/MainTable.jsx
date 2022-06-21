@@ -1,28 +1,27 @@
-import * as React from 'react';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
-import { data } from '../data';
-import Popup from './MiniTablePopup';
-import { Box, LinearProgress, Tooltip } from '@mui/material';
-import { ShownValueSelect } from './ShownValueSelect';
+import * as React from "react"
+import Table from "@mui/material/Table"
+import TableBody from "@mui/material/TableBody"
+import TableCell from "@mui/material/TableCell"
+import TableContainer from "@mui/material/TableContainer"
+import TableHead from "@mui/material/TableHead"
+import TableRow from "@mui/material/TableRow"
+import Paper from "@mui/material/Paper"
+import { LinearProgress, Tooltip } from "@mui/material"
+import { ShownValueSelect } from "./ShownValueSelect"
 
 
 
 const MainTable = ({regions, handleMiniTableOpen}) => {
   const [isDateSelected, setIsDateSelected] = React.useState(true)
+
   const toggleSelected = (show) => {
+
     if(show === "show date") {
       setIsDateSelected(true)
     } else {
       setIsDateSelected(false)
     }
   }
- 
 
   return (
     <React.Fragment>
@@ -60,11 +59,8 @@ const MainTable = ({regions, handleMiniTableOpen}) => {
               <TableCell align="center">yy</TableCell>
               <TableCell align="center">zz</TableCell>
             </TableRow>
-
           </TableHead>
-          
           <TableBody>
-          
             {regions?.map((el) => (
               <TableRow
                 key={el.region}
@@ -74,7 +70,7 @@ const MainTable = ({regions, handleMiniTableOpen}) => {
                   {el.region}
                 </TableCell>
                 <Tooltip
-                  placement='top'
+                  placement="top"
                   arrow enterDelay={500}
                   leaveDelay={200}
                   title={el?.year2017XX[el.year2017XX.length - 1]?.name
@@ -92,7 +88,7 @@ const MainTable = ({regions, handleMiniTableOpen}) => {
                   </TableCell>
                 </Tooltip>
                 <Tooltip
-                  placement='top'
+                  placement="top"
                   arrow enterDelay={500}
                   leaveDelay={200}
                   title={el?.year2017YY[el.year2017YY.length - 1]?.name
@@ -110,7 +106,7 @@ const MainTable = ({regions, handleMiniTableOpen}) => {
                   </TableCell>
                 </Tooltip>
                 <Tooltip
-                  placement='top'
+                  placement="top"
                   arrow enterDelay={500}
                   leaveDelay={200}
                   title={el?.year2017ZZ[el.year2017ZZ.length - 1]?.name
@@ -128,7 +124,7 @@ const MainTable = ({regions, handleMiniTableOpen}) => {
                   </TableCell>
                 </Tooltip>
                 <Tooltip
-                  placement='top'
+                  placement="top"
                   arrow enterDelay={500}
                   leaveDelay={200}
                   title={el?.year2018XX[el.year2018XX.length - 1]?.name
@@ -146,7 +142,7 @@ const MainTable = ({regions, handleMiniTableOpen}) => {
                   </TableCell>
                 </Tooltip>
                 <Tooltip
-                  placement='top'
+                  placement="top"
                   arrow enterDelay={500}
                   leaveDelay={200}
                   title={el?.year2018YY[el.year2018YY.length - 1]?.name
@@ -164,7 +160,7 @@ const MainTable = ({regions, handleMiniTableOpen}) => {
                   </TableCell>
                 </Tooltip>
                 <Tooltip
-                  placement='top'
+                  placement="top"
                   arrow enterDelay={500}
                   leaveDelay={200}
                   title={el?.year2018ZZ[el.year2018ZZ.length - 1]?.name
@@ -182,7 +178,7 @@ const MainTable = ({regions, handleMiniTableOpen}) => {
                   </TableCell>
                 </Tooltip>
                 <Tooltip
-                  placement='top'
+                  placement="top"
                   arrow enterDelay={500}
                   leaveDelay={200}
                   title={el?.year2019XX[el.year2019XX.length - 1]?.name
@@ -200,7 +196,7 @@ const MainTable = ({regions, handleMiniTableOpen}) => {
                   </TableCell>
                 </Tooltip>
                 <Tooltip
-                  placement='top'
+                  placement="top"
                   arrow enterDelay={500}
                   leaveDelay={200}
                   title={el?.year2019YY[el.year2019YY.length - 1]?.name
@@ -218,7 +214,7 @@ const MainTable = ({regions, handleMiniTableOpen}) => {
                   </TableCell>
                 </Tooltip>
                 <Tooltip
-                  placement='top'
+                  placement="top"
                   arrow enterDelay={500}
                   leaveDelay={200}
                   title={el?.year2019ZZ[el.year2019ZZ.length - 1]?.name
@@ -243,4 +239,5 @@ const MainTable = ({regions, handleMiniTableOpen}) => {
     </React.Fragment>
   )
 }
+
 export default MainTable

@@ -1,8 +1,8 @@
-import React from 'react'
-import { DataGrid, GridToolbar } from '@mui/x-data-grid'
+import React from "react"
+import { DataGrid, GridToolbar } from "@mui/x-data-grid"
 import { dateTransform, myTimestamp } from "../utils"
-import { Button, Chip, LinearProgress, Stack, Typography } from '@mui/material'
-import { DeleteUserDialog } from './DeleteUserDialog'
+import { Button, Stack } from "@mui/material"
+import { DeleteUserDialog } from "./DeleteUserDialog"
 
 
 
@@ -16,7 +16,7 @@ const MiniTable = ({cellData, handelUpdateCellsData, handlePopupClose}) => {
 
   let columnsData = [
     {field: "id", headerName: "ID", width: 150},
-    {field: "value", headerName: "Value", width: 150, type: 'number', editable: true},
+    {field: "value", headerName: "Value", width: 150, type: "number", editable: true},
     {field: "date", headerName: "date", width: 150},
     {field: "name", headerName: "name", width: 150, editable: true},
     {field: "text", headerName: "text", width: 300, editable: true},
@@ -47,24 +47,24 @@ const MiniTable = ({cellData, handelUpdateCellsData, handlePopupClose}) => {
     setUsers((prev) => [...prev, defaultUserData])
   }
 
-  const deleteUser = (id) => {
-    setUsers((prev) => prev.filter(user => user.id !== id))
-  }
+  const deleteUser = (id) => setUsers((prev) => prev.filter(user => user.id !== id))
 
   const handelEditCell = (e) => {
     const editedUsers = users.map((record) => {
+
       if(record.id === e.id) {
-        return {...record, [e.field]: e.value}
-      } else {
-        return {...record}
+          return {...record, [e.field]: e.value}
+        } else {
+          return {...record}
+        }
       }
-    })
+    )
     setUsers(editedUsers)
   }
   
   return (
-    <div style={{ height: 430, width: '100%' }}>
-      <div style={{ display: 'flex', height: '100%' }}>
+    <div style={{ height: 430, width: "100%" }}>
+      <div style={{ display: "flex", height: "100%" }}>
         <div style={{ flexGrow: 1 }}>
           <DataGrid 
             columns={columnsData}
@@ -79,9 +79,6 @@ const MiniTable = ({cellData, handelUpdateCellsData, handlePopupClose}) => {
             <DeleteUserDialog deleteUser={deleteUser} />
             <Button sx={{color: "seagreen"}} disabled ={disabledBtn} onClick={() => {handelUpdateCellsData(users)}}>Save Changes</Button>
             <Button sx={{color: "#111"}} onClick={() => {handlePopupClose()}}>Close</Button>
-          </Stack> 
-          <Stack>
-            {/* <Typography>jj'\lj;;aj</Typography> */}
           </Stack>
         </div>
       </div>

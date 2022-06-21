@@ -1,11 +1,11 @@
-import * as React from 'react';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Select from '@mui/material/Select';
+import  React from "react"
+import InputLabel from "@mui/material/InputLabel"
+import MenuItem from "@mui/material/MenuItem"
+import FormControl from "@mui/material/FormControl"
+import Select from "@mui/material/Select"
 
 export const ShownValueSelect = ({toggleSelected}) => {
-  const [show, setShow] = React.useState('show date');
+  const [show, setShow] = React.useState("show date")
 
   const handleChange = (event) => {
     setShow(event.target.value)
@@ -27,5 +27,5 @@ export const ShownValueSelect = ({toggleSelected}) => {
         </Select>
       </FormControl>
     </React.Fragment>
-  );
+  )
 }
