@@ -6,24 +6,20 @@ const SnackbarAlert = React.forwardRef(
     return <Alert elevation={12} ref={ref} {...props} />
   }
 ) 
- 
-
 
 export const InfoSnackbar = ({message, isAlertOpen}) => {
   const [open, setOpen] = React.useState(false)
 console.log(open, isAlertOpen);
-  React.useEffect(() => {
-    setOpen(isAlertOpen)
-  }, [isAlertOpen])
+
+  // React.useEffect(() => {
+  //   setOpen(isAlertOpen)
+  // }, [])
 
   const handleClose = (event, reason) => {
     if(reason === "clickaway") {
       return
     }
-    setTimeout(() => {
-      setOpen(false)
-    }, 4000)
-    
+    setOpen(false) 
   }
   
 
@@ -40,9 +36,9 @@ console.log(open, isAlertOpen);
           horizontal: "center"
         }}
       /> */}
-      <Snackbar open={open} onClose={handleClose}>
+      <Snackbar open={isAlertOpen} autoHideDuration={3000} onClose={handleClose}>
         <SnackbarAlert onClose={handleClose} severity="success">
-         {message}
+          {message}
         </SnackbarAlert>
       </Snackbar>
     </React.Fragment>

@@ -63,7 +63,7 @@ const MiniTable = ({cellData, handelUpdateCellsData, handlePopupClose}) => {
   }
   
   return (
-    <div style={{ height: 400, width: '100%' }}>
+    <div style={{ height: 430, width: '100%' }}>
       <div style={{ display: 'flex', height: '100%' }}>
         <div style={{ flexGrow: 1 }}>
           <DataGrid 
@@ -74,10 +74,10 @@ const MiniTable = ({cellData, handelUpdateCellsData, handlePopupClose}) => {
             }}
             onCellEditCommit={handelEditCell}
           />
-          <Stack direction="row" spacing={2} sx={{marginTop: "10px"}} >
+          <Stack direction="row" justifyContent="flex-end" spacing={2} sx={{marginTop: "10px"}} >
             <Button sx={{color: "skyblue"}} disabled ={disabledBtn} onClick={() => {addNewUser()}}>Add New User</Button>
             <DeleteUserDialog deleteUser={deleteUser} />
-            <Button sx={{color: "green"}} disabled ={disabledBtn} onClick={() => {handelUpdateCellsData(users)}}>Save Changes</Button>
+            <Button sx={{color: "seagreen"}} disabled ={disabledBtn} onClick={() => {handelUpdateCellsData(users)}}>Save Changes</Button>
             <Button sx={{color: "#111"}} onClick={() => {handlePopupClose()}}>Close</Button>
           </Stack> 
           <Stack>

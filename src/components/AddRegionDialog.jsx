@@ -7,34 +7,46 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import { addNewRegion } from '../firebase';
-import { InfoSnackbar } from './InfoSnackbar';
-import { messageAddSuccess } from '../utils';
+import { messageAddSuccess, SnackbarAlert, useSetTimeout } from '../utils';
+import { InfoSnackbar } from "./InfoSnackbar"
+import { Alert, Snackbar } from '@mui/material';
+
+
 
 export const AddRegionDialog = ({deleteUser}) => {
-  const [open, setOpen] = React.useState(false);
+  const [openAlert, setOpenAlert] = React.useState(false)
+  const [openDialog, setOpenDialog] = React.useState(false);
   const [inputValue, setInputValue] = React.useState("");
-  const [alertSnackbar, setAlertSnackbar] = React.useState(false);
 
   const handleClickOpen = () => {
-    setOpen(true);
+    setOpenDialog(true);
+    
   };
 
-  const handleClose = () => {
+  const handleCloseDialog = () => {
     
-    setOpen(false);
+    setOpenDialog(false);
     if(inputValue) {
-      setAlertSnackbar(true)
+      
       addNewRegion(inputValue)
+      setOpenAlert(true)
     }
     setInputValue("")
   };
+
+  const handleClose = (event, reason) => {
+    if(reason === "clickaway") {
+      return
+    }
+    setOpenAlert(false) 
+  }
 
   return (
     <div>
       <Button sx={{color: "#333"}} onClick={handleClickOpen}>
         Add new region +
       </Button>
-      <Dialog open={open} onClose={handleClose}>
+      <Dialog open={openDialog} onClose={handleCloseDialog}>
         <DialogTitle></DialogTitle>
         <DialogContent>
           <DialogContentText>
@@ -53,11 +65,18 @@ export const AddRegionDialog = ({deleteUser}) => {
           />
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose}>Cancel</Button>
-          <Button onClick={handleClose}>Ok</Button>
+          <Button onClick={handleCloseDialog}>Cancel</Button>
+          <Button onClick={handleCloseDialog}>Ok</Button>
         </DialogActions>
       </Dialog>
-      <InfoSnackbar isAlertOpen={alertSnackbar} message={messageAddSuccess} />
+      <Snackbar open={openAlert} autoHideDuration={2000} onClose={handleClose}>
+        <SnackbarAlert onClose={handleClose} severity="success">
+          {messageAddSuccess}
+        </SnackbarAlert>
+      </Snackbar>
+      {/* <InfoSnackbar isAlertOpen={alertSnackbar} message={messageAddSuccess} /> */}
     </div>
   )
 }
+
+
